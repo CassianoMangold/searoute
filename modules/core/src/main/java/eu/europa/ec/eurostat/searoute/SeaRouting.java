@@ -5,6 +5,7 @@ package eu.europa.ec.eurostat.searoute;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -64,7 +65,7 @@ public class SeaRouting {
 			//load marnet
 			DataStore store = null;
 			SimpleFeatureCollection fc = null;
-			/*try {
+			try {
 				URL url = getClass().getResource("/marnet/marnet_plus_"+resKM+"km.gpkg");
 				HashMap<String, Object> map = new HashMap<>();
 				map.put(GeoPkgDataStoreFactory.DBTYPE.key, "geopkg");
@@ -72,15 +73,14 @@ public class SeaRouting {
 				map.put("url", url);
 				store = DataStoreFinder.getDataStore(map);
 				fc = store.getFeatureSource(store.getTypeNames()[0]).getFeatures();
-			} catch (Exception e) {*/
-				//URL url = new URL(path);
+			} catch (Exception e) {
 				HashMap<String, Object> map = new HashMap<>();
 				map.put(GeoPkgDataStoreFactory.DBTYPE.key, "geopkg");
 				map.put(GeoPkgDataStoreFactory.DATABASE.key, "marnet/marnet_plus_"+resKM+"km.gpkg");
 				map.put("url", "marnet/marnet_plus_"+resKM+"km.gpkg");
 				store = DataStoreFinder.getDataStore(map);
 				fc = store.getFeatureSource(store.getTypeNames()[0]).getFeatures();
-			//}
+			}
 
 			//build graph
 			FeatureIterator<?> it = fc.features();
